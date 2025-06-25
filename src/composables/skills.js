@@ -2,8 +2,10 @@ import {ref} from "vue";
 import axios  from "axios";
 import {useRouter} from "vue-router";
 
-axios.defaults.baseURL="http://127.0.0.1:8000/api/v1/"  // this is the  api endpoint 
+axios.defaults.baseURL="http://127.0.0.1:8000/api/v1/"  // Endpoint
+
 export default function  useSkills(){
+
     const skills =ref([]);
     const skill = ref([]);
     const errors=ref({});
@@ -13,10 +15,12 @@ export default function  useSkills(){
     skills.value = response.data.data;
 
     }
+
     const getSkill= async(id)=>{
         const response = await axios.get("skills" + id);
          skill.value = response.data.data;
     }
+
     const  storeSkill= async (data)=>{
         try {
         await axios.post('skills',data);
@@ -27,6 +31,7 @@ export default function  useSkills(){
             }
         }
     }
+
     const updateSkill = async (id)=>{
         try {
             await axios.put('skills/'+ id,skill.value);
@@ -37,6 +42,7 @@ export default function  useSkills(){
             }
         }
     }
+    
     const  destroySkill = async(id)=>{
         if (!window.confirm("are you sure !")){
      return;
